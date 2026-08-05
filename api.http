@@ -1,0 +1,13 @@
+POST http://localhost:8081/api/customer/create/
+Content-Type: application/json
+
+{
+  "nombre": "Pedro",
+  "apellido": "Esteban",
+  "direccion": "Antigua",
+  "correo": "pedro@correo.com",
+  "telefono": "12345678"
+}
+
+### CREATE
+GET http://localhost:8081/api/customer/
