@@ -1,9 +1,10 @@
 module.exports = app => {
   const clientes = require("../controllers/cliente.controller.js");
+  const { verifyToken } = require("../middlewares/authJwt.js");
   var router = require("express").Router();
 
   // Create a new Client
-  router.post("/create", clientes.create);
+  router.post("/create", [verifyToken], clientes.create);
   // Retrieve all Clients
   router.get("/", clientes.findAll);
   // Retrieve all active Clients
@@ -11,12 +12,11 @@ module.exports = app => {
   // Retrieve a single Client by id
   router.get("/:id", clientes.findOne);
   // Update a Client by id
-  router.put("/update/:id", clientes.update);
+  router.put("/update/:id",[verifyToken] ,clientes.update);
   // Delete a Client by id
-  router.delete("/delete/:id", clientes.delete);
+  router.delete("/delete/:id", [verifyToken], clientes.delete);
   // Delete all Clients
-  router.delete("/delete", clientes.deleteAll);
-
+  router.delete("/delete", [verifyToken], clientes.deleteAll);
   // app.use("/prefijo", router) simplifica el URI final
   // Ej. http://localhost:puerto/api/customer/
   app.use("/api/customer", router);
